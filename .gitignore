@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+www/
+.angular/
+
+# Capacitor
+android/
+ios/
+
+# Environment files (contain Firebase config — add your own)
+# src/environments/environment.ts  ← keep the template, not secrets
+# If you store real keys, add:
+# src/environments/environment*.local.ts
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Firebase
+.firebase/
+firebase-debug.log
+firebaserc
+
+# Cache
+.cache/

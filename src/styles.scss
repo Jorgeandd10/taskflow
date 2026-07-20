@@ -1,0 +1,64 @@
+/* Ionic global styles */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* ── Desktop cursor fixes ─────────────────────────────────────────────────
+   Ionic está orientado a móvil y no define cursor:pointer en sus shadow roots.
+   Estas reglas usan ::part() para penetrar el shadow DOM y garantizan una
+   experiencia correcta en browser de escritorio.
+──────────────────────────────────────────────────────────────────────────── */
+ion-fab-button::part(native),
+ion-button::part(native) {
+  cursor: pointer;
+}
+
+ion-chip,
+ion-item,
+ion-item-option,
+ion-checkbox,
+ion-select {
+  cursor: pointer;
+}
+
+/* ── Ionic modal overlay fix ──────────────────────────────────────────────────
+   Cuando ion-modal está cerrado (overlay-hidden), su shadow root interno sigue
+   teniendo un ion-backdrop con pointer-events: auto que bloquea los clicks
+   de toda la página (incluyendo el FAB button).
+   Con pointer-events: none en el modal cerrado, los eventos pasan a través.
+──────────────────────────────────────────────────────────────────────────────── */
+ion-modal.overlay-hidden {
+  pointer-events: none;
+}
+
+/* ── ion-router-outlet click-blocking fix ────────────────────────────────────
+   ion-router-outlet tiene position:absolute y pointer-events:auto, y al ser
+   el elemento más alto en el stack (z-index), intercepta TODOS los clicks
+   antes de que lleguen al contenido de la página (chips, checkboxes, botones).
+   La solución: hacer el outlet transparente a eventos de puntero y restaurar
+   pointer-events en sus hijos directos (los page components) para que ellos
+   y todos sus descendientes sean interactivos normalmente.
+──────────────────────────────────────────────────────────────────────────────── */
+ion-router-outlet {
+  pointer-events: none;
+}
+ion-router-outlet > * {
+  pointer-events: auto;
+}
+
+/* ── TaskFlow custom theme ────────────────────────────────────────────────── */
+:root {
+  --ion-color-primary: #6366f1;
+  --ion-color-primary-rgb: 99, 102, 241;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #575ad4;
+  --ion-color-primary-tint: #7375f3;
+}
